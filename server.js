@@ -46,7 +46,9 @@ app.get('/proxy', (req, res) => {
             'Access-Control-Allow-Origin': '*',
             'Icy-Name': radioResponse.headers['icy-name'] || '',
             'Cache-Control': 'no-cache',
-            'Connection': 'keep-alive'
+            'Connection': 'keep-alive',
+            // ✅ Forzar modo de audio "media" en Android
+            'Audio-Mode': 'media'
         });
 
         radioResponse.pipe(res);
@@ -131,7 +133,7 @@ function getIcyMetadata(protocol, options) {
                             }
                         }
                     }
-                    res.destroy(); // Cerrar conexión después de obtener metadatos
+                    res.destroy();
                 }
             });
 
